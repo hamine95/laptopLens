@@ -3,8 +3,17 @@ import json
 import requests
 from dateutil import parser
 import pytz
+import ollama
+import logging
 
 def main():
+    response = ollama.chat(model='llama2', messages=[
+    {
+        'role': 'user',
+        'content': 'Why is the sky blue?',
+    },
+    ])
+    logging.info(response['message']['content'])
     url="https://api.ouedkniss.com/graphql"
     general_header={"authorization": None, "locale": "fr", "x-app-version": "\"3.0.8\"", "x-referer": "https://www.ouedkniss.com/informatique-ordinateur-portable-laptop/1"}
     is_current_year=True
@@ -19,6 +28,7 @@ def main():
         print(f'page num:{page_count} status:{result.status_code}')
         
         data=result.json()
+        print(data)
         #print(data["data"]["search"]["announcements"]["data"])
         data=data["data"]["search"]["announcements"]["data"]
         print(len(data))

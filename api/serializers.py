@@ -17,9 +17,10 @@ class DiscSerializer(serializers.ModelSerializer):
         fields=('tech_type','size')
 
 class LaptopSerializer(serializers.ModelSerializer):
+    #ram = serializers.PrimaryKeyRelatedField(read_only=True)
     class Meta:
         model=Laptop
-        fields=('reference','cpu','ram','disk','price','has_delivery','medias')
+        fields=('reference','price','has_delivery','medias','cpu','ram','disk')
 
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -29,7 +30,7 @@ class LocationSerializer(serializers.ModelSerializer):
 class StoreSerializer(serializers.ModelSerializer):
     class Meta:
         model=Store
-        fields=('name','slug','description','image_url','url','followers','announcement_count','locations')
+        fields=('name','slug','description','image_url','url','locations')
 
 class AnnouncementSerializer(serializers.ModelSerializer):
     class Meta:
